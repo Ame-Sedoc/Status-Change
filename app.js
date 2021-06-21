@@ -30,7 +30,7 @@ app.post('/events', function(req, res){
   } else {
     // Store details about the user
     var evt = req.body.event;
-    
+
     var user_id = evt.user.id;
     var user_name = evt.user.real_name_normalized;
     var status_text = evt.user.profile.status_text;
@@ -82,7 +82,7 @@ function postUpdate(attachments) {
     "pretty": true
   };
   request.post(
-    "https://slack.com/api/chat.postmessage",
+    "https://slack.com/api/chat.postMessage",
     {
       form: data
     },
