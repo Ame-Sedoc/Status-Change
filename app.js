@@ -79,6 +79,7 @@ function postUpdate(attachments) {
     "token": api_token,
     "channel": channel_id,
     "text": JSON.stringify(attachments),
+    "attachments": attachments,
     "pretty": true
   };
   request.post(
