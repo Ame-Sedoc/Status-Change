@@ -32,13 +32,14 @@ app.post('/events', function(req, res){
     var evt = req.body.event;
 
     var user_id = evt.user.id;
-    var user_name = evt.user.real_name_normalized;
+    console.log(evt, evt.user)
+    var user_name = evt.user.display_name_normalized;
     var status_text = evt.user.profile.status_text;
     var status_emoji = evt.user.profile.status_emoji;
 
     // If no full name set, use the username instead
     if(user_name == "") {
-      user_name = evt.user.name;
+      user_name = evt.user.display_name;
     }
 
     // Return a 200 to the event request
@@ -78,7 +79,6 @@ function postUpdate(attachments) {
   var data = {
     "token": api_token,
     "channel": channel_id,
-    "text": JSON.stringify(attachments),
     "attachments": JSON.stringify(attachments),
     "pretty": true
   };
