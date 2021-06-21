@@ -98,6 +98,6 @@ function postUpdate(attachments) {
 }
 
 // Listen for requests
-var listener = app.listener(process.env.PORT, function () {
+var listener = app.listen(process.env.PORT, function () {
   console.log('App is listening on port ' + listener.address().port);
 });
