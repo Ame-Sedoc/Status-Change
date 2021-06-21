@@ -21,7 +21,7 @@ var channel_id = process.env.CHANNEL_ID;
 
 
 // Handle Events API events
-app.get('/events', function(req, res){
+app.post('/events', function(req, res){
 
   if(req.body.challenge) {
     // Respond to the challenge
@@ -30,6 +30,7 @@ app.get('/events', function(req, res){
   } else {
     // Store details about the user
     var evt = req.body.event;
+    
     var user_id = evt.user.id;
     var user_name = evt.user.real_name_normalized;
     var status_text = evt.user.profile.status_text;
