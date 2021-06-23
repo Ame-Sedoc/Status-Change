@@ -19,9 +19,8 @@ var channel_id = process.env.CHANNEL_ID;
 
 
 
-
 // Handle Events API events
-app.post('/events', function(req, res){
+app.post('/events', function(req, res){ //changed app.get to app.post (to listen for POST requests rather than GET requests)
 
   if(req.body.challenge) {
     // Respond to the challenge
@@ -32,13 +31,13 @@ app.post('/events', function(req, res){
     var evt = req.body.event;
 
     var user_id = evt.user.id;
-    var user_name = evt.user.profile.real_name_normalized;
+    var user_name = evt.user.profile.real_name_normalized; //changed evt.user.real_name_normalized to evt.user.profile.real_name_normalized (added missing profile item)
     var status_text = evt.user.profile.status_text;
     var status_emoji = evt.user.profile.status_emoji;
 
     // If no full name set, use the username instead
     if(!user_name) {
-      user_name = evt.user.name;
+      user_name = evt.user.name; //changed the if clause to check if user_name does not exist or is empty rather than only checking if user_name is empty(i.e. from user_name == "" to !user_name)
     }
 
     // Return a 200 to the event request
@@ -78,11 +77,11 @@ function postUpdate(attachments) {
   var data = {
     "token": api_token,
     "channel": channel_id,
-    "attachments": JSON.stringify(attachments),
+    "attachments": JSON.stringify(attachments), //changed text to attachments
     "pretty": true
   };
   request.post(
-    "https://slack.com/api/chat.postMessage",
+    "https://slack.com/api/chat.postMessage", //changed https://slack.com/api/chat.postmessage to https://slack.com/api/chat.postMessage(correct method URL)
     {
       form: data
     },
@@ -101,4 +100,4 @@ function postUpdate(attachments) {
 // Listen for requests
 var listener = app.listen(process.env.PORT, function () {
   console.log('App is listening on port ' + listener.address().port);
-});
+}); //changed app.listener to app.listen- incorrect method
